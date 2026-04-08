@@ -11,7 +11,7 @@ public class Sale {
     this.customer = customer;
 
     if (originalAmount < 0)
-      throw new IllegalArgumentException("Original amount cannot be negative.");
+      throw new IllegalArgumentException("El monto no puede ser negativo.");
     this.originalAmount = originalAmount;
 
     this.finalAmount = originalAmount;
