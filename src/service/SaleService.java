@@ -27,7 +27,7 @@ public class SaleService {
     Objects.requireNonNull(paymentProcessor, "El procesador de pagos no puede ser nulo ");
     Objects.requireNonNull(documentType, "El tipo de documento no puede ser nulo");
 
-    string CUSTOMER_NAME = sale.getCustomer().getName();
+    String CUSTOMER_NAME = sale.getCustomer().getName();
     double ORIGINAL_AMOUNT = sale.getOriginalAmount();
     FiscalDocument FISCAL_DOCUMENT = this.fiscalDocumentFactory.createFiscalDocument(documentType);
     double AMOUNT_WITH_DISCOUNT_APPLIED = discountStrategy.applyDiscount(ORIGINAL_AMOUNT);
