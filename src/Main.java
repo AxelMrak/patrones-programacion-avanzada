@@ -17,9 +17,7 @@ class Main {
     SaleService saleService = new SaleService(fiscalDocumentFactory);
 
     // Wholesale Scenario
-    //
     System.out.println("--- Escenario Mayorista --- \n");
-
     Customer wholesaleCustomer = new Customer("Empresa Mendoza", true);
     Sale wholesaleSale = new Sale(wholesaleCustomer, 1000.00);
 
@@ -29,14 +27,11 @@ class Main {
 
     MercadoPagoAdapter mercadoPagoAdapter = new MercadoPagoAdapter(mercadoPagoAPI);
 
-
-
     saleService.checkout(wholesaleSale, wholesaleDiscount, mercadoPagoAdapter, "A");
 
     // Individual Scenario
 
     System.out.println("\n--- Escenario Individual --- \n");
-
     Customer individualCustomer = new Customer("Juan Perez", false);
     Sale individualSale = new Sale(individualCustomer, 200.00);
 
@@ -46,7 +41,6 @@ class Main {
 
     CashPaymentAdapter cashPaymentAdapter = new CashPaymentAdapter(cashRegisterPayment);
 
-    saleService = new SaleService(fiscalDocumentFactory);
 
     saleService.checkout(individualSale, cashDiscount, cashPaymentAdapter, "B");
   }
