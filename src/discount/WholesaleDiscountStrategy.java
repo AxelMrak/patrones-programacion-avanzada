@@ -1,3 +1,5 @@
+package discount;
+
 public class WholesaleDiscountStrategy implements DiscountStrategy {
   private final double DISCOUNT_RATE = 0.20;
 

@@ -1,5 +1,11 @@
 import billing.FiscalDocumentFactory;
+import discount.CashDiscountStrategy;
+import discount.DiscountStrategy;
+import discount.WholesaleDiscountStrategy;
+import model.Customer;
 import model.Sale;
+import payment.CashPaymentAdapter;
+import payment.CashRegisterPayment;
 import payment.MercadoPagoAPI;
 import payment.MercadoPagoAdapter;
 import service.SaleService;
@@ -36,12 +42,12 @@ class Main {
 
     DiscountStrategy cashDiscount = new CashDiscountStrategy();
 
-    CashRegisterSystem cashRegisterSystem = new CashRegisterSystem();
+    CashRegisterPayment cashRegisterPayment = new CashRegisterPayment();
 
-    CashSystemAdapter cashSystemAdapter = new CashSystemAdapter(cashRegisterSystem);
+    CashPaymentAdapter cashPaymentAdapter = new CashPaymentAdapter(cashRegisterPayment);
 
     saleService = new SaleService(fiscalDocumentFactory);
 
-    saleService.checkout(individualSale, cashDiscount, cashSystemAdapter, "B");
+    saleService.checkout(individualSale, cashDiscount, cashPaymentAdapter, "B");
   }
 }

@@ -1,12 +1,9 @@
 package payment;
 
-import payment.PaymentProcessor;
-import payment.CashRegisterPayment;
-
-class CashRegisterPayment implements PaymentProcessor {
+public class CashPaymentAdapter implements PaymentProcessor {
   private CashRegisterPayment cashRegisterPayment;
 
-  public CashRegisterPayment(CashRegisterPayment cashRegisterPayment) {
+  public CashPaymentAdapter(CashRegisterPayment cashRegisterPayment) {
     this.cashRegisterPayment = cashRegisterPayment;
   }
 

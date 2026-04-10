@@ -2,6 +2,7 @@ package service;
 
 import billing.FiscalDocument;
 import billing.FiscalDocumentFactory;
+import discount.DiscountStrategy;
 import model.Sale;
 import payment.PaymentProcessor;
 

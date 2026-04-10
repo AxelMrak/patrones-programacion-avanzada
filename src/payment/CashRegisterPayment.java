@@ -5,7 +5,7 @@ package payment;
  * Internal LIB.
  */
 
-class CashRegisterPayment {
+public class CashRegisterPayment {
   public void registerPayment(double amount) {
     System.out.println("Ingresando pago en caja registradora: $" + amount);
   }

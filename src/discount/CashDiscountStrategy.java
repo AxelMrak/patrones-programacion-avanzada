@@ -1,3 +1,5 @@
+package discount;
+
 public class CashDiscountStrategy implements DiscountStrategy {
   private final double DISCOUNT_RATE = 0.10;
 
