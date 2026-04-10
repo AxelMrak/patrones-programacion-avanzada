@@ -5,6 +5,7 @@ import billing.FiscalDocumentFactory;
 import discount.DiscountStrategy;
 import model.Sale;
 import payment.PaymentProcessor;
+import billing.DocumentType;
 
 public class SaleService {
   private FiscalDocumentFactory fiscalDocumentFactory;
@@ -14,7 +15,7 @@ public class SaleService {
   }
 
   public void checkout(Sale sale, DiscountStrategy discountStrategy, PaymentProcessor paymentProcessor,
-      String documentType) {
+      DocumentType documentType) {
 
     double finalAmount = discountStrategy.applyDiscount(sale.getOriginalAmount());
 
@@ -31,7 +32,8 @@ public class SaleService {
     System.out.println(successMessage);
   }
 
-  private String generateSuccessMessage(String documentType, String customerName, double amount) {
-    return "Venta realizada con éxito. Documento: " + documentType + ", Cliente: " + customerName + ", Monto: $" + amount;
+  private String generateSuccessMessage(DocumentType documentType, String customerName, double amount) {
+    return "Venta realizada con éxito. Documento: " + documentType + ", Cliente: " + customerName + ", Monto: $"
+        + amount;
   }
 }

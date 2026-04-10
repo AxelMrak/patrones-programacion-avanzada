@@ -1,3 +1,4 @@
+import billing.DocumentType;
 import billing.FiscalDocumentFactory;
 import discount.CashDiscountStrategy;
 import discount.DiscountStrategy;
@@ -27,7 +28,7 @@ class Main {
 
     MercadoPagoAdapter mercadoPagoAdapter = new MercadoPagoAdapter(mercadoPagoAPI);
 
-    saleService.checkout(wholesaleSale, wholesaleDiscount, mercadoPagoAdapter, "A");
+    saleService.checkout(wholesaleSale, wholesaleDiscount, mercadoPagoAdapter, DocumentType.INVOICE_A);
 
     // Individual Scenario
 
@@ -41,7 +42,6 @@ class Main {
 
     CashPaymentAdapter cashPaymentAdapter = new CashPaymentAdapter(cashRegisterPayment);
 
-
-    saleService.checkout(individualSale, cashDiscount, cashPaymentAdapter, "B");
+    saleService.checkout(individualSale, cashDiscount, cashPaymentAdapter, DocumentType.INVOICE_B);
   }
 }
