@@ -5,30 +5,40 @@ import billing.FiscalDocumentFactory;
 import discount.DiscountStrategy;
 import model.Sale;
 import payment.PaymentProcessor;
+
+import java.util.Objects;
+
 import billing.DocumentType;
 
 public class SaleService {
-  private FiscalDocumentFactory fiscalDocumentFactory;
+  private final FiscalDocumentFactory fiscalDocumentFactory;
 
   public SaleService(FiscalDocumentFactory fiscalDocumentFactory) {
-    this.fiscalDocumentFactory = fiscalDocumentFactory;
+    this.fiscalDocumentFactory = Objects.requireNonNull(fiscalDocumentFactory,
+        "El FiscalDocumentFactory no puede ser nulo");
   }
 
   public void checkout(Sale sale, DiscountStrategy discountStrategy, PaymentProcessor paymentProcessor,
       DocumentType documentType) {
 
-    double finalAmount = discountStrategy.applyDiscount(sale.getOriginalAmount());
+    // GUARDS
+    Objects.requireNonNull(sale, "La venta no puede ser nula");
+    Objects.requireNonNull(discountStrategy, "La estrategia de descuento no puede ser nula");
+    Objects.requireNonNull(paymentProcessor, "El procesador de pagos no puede ser nulo ");
+    Objects.requireNonNull(documentType, "El tipo de documento no puede ser nulo");
 
-    sale.setFinalAmount(finalAmount);
+    string CUSTOMER_NAME = sale.getCustomer().getName();
+    double ORIGINAL_AMOUNT = sale.getOriginalAmount();
+    FiscalDocument FISCAL_DOCUMENT = this.fiscalDocumentFactory.createFiscalDocument(documentType);
+    double AMOUNT_WITH_DISCOUNT_APPLIED = discountStrategy.applyDiscount(ORIGINAL_AMOUNT);
 
-    paymentProcessor.processPayment(finalAmount);
+    sale.setFinalAmount(AMOUNT_WITH_DISCOUNT_APPLIED);
+    paymentProcessor.processPayment(AMOUNT_WITH_DISCOUNT_APPLIED);
 
-    FiscalDocument fiscalDocument = fiscalDocumentFactory.createFiscalDocument(documentType);
-    String customerName = sale.getCustomer().getName();
     double saleFinalAmount = sale.getFinalAmount();
-    fiscalDocument.generate(customerName, saleFinalAmount);
+    FISCAL_DOCUMENT.generate(CUSTOMER_NAME, saleFinalAmount);
 
-    String successMessage = generateSuccessMessage(documentType, customerName, saleFinalAmount);
+    String successMessage = generateSuccessMessage(documentType, CUSTOMER_NAME, saleFinalAmount);
     System.out.println(successMessage);
   }
 
