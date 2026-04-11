@@ -1,10 +1,10 @@
+import model.Customer;
+import model.Sale;
 import billing.DocumentType;
 import billing.FiscalDocumentFactory;
 import discount.CashDiscountStrategy;
 import discount.DiscountStrategy;
 import discount.WholesaleDiscountStrategy;
-import model.Customer;
-import model.Sale;
 import payment.CashPaymentAdapter;
 import payment.CashRegisterPayment;
 import payment.MercadoPagoAPI;
@@ -17,31 +17,38 @@ class Main {
     FiscalDocumentFactory fiscalDocumentFactory = new FiscalDocumentFactory();
     SaleService saleService = new SaleService(fiscalDocumentFactory);
 
+    runWholesaleScenario(saleService);
+    runIndividualScenario(saleService);
+  }
+
+  private static void runWholesaleScenario(SaleService saleService) {
     // Wholesale Scenario
     System.out.println("--- Escenario Mayorista --- \n");
-    Customer wholesaleCustomer = new Customer("Empresa Mendoza", true);
-    Sale wholesaleSale = new Sale(wholesaleCustomer, 1000.00);
 
-    DiscountStrategy wholesaleDiscount = new WholesaleDiscountStrategy();
+    Customer customer = new Customer("Empresa Mendoza", true);
+    Sale sale = new Sale(customer, 1000.00);
+
+    DiscountStrategy discount = new WholesaleDiscountStrategy();
 
     MercadoPagoAPI mercadoPagoAPI = new MercadoPagoAPI();
+    MercadoPagoAdapter payment = new MercadoPagoAdapter(mercadoPagoAPI, "Venta Mayorista");
 
-    MercadoPagoAdapter mercadoPagoAdapter = new MercadoPagoAdapter(mercadoPagoAPI);
+    saleService.checkout(sale, discount, payment, DocumentType.INVOICE_A);
 
-    saleService.checkout(wholesaleSale, wholesaleDiscount, mercadoPagoAdapter, DocumentType.INVOICE_A);
+  }
 
+  private static void runIndividualScenario(SaleService saleService) {
     // Individual Scenario
-
     System.out.println("\n--- Escenario Individual --- \n");
-    Customer individualCustomer = new Customer("Juan Perez", false);
-    Sale individualSale = new Sale(individualCustomer, 200.00);
 
-    DiscountStrategy cashDiscount = new CashDiscountStrategy();
+    Customer customer = new Customer("Juan Perez", false);
+    Sale sale = new Sale(customer, 200.00);
+
+    DiscountStrategy discount = new CashDiscountStrategy();
 
     CashRegisterPayment cashRegisterPayment = new CashRegisterPayment();
+    CashPaymentAdapter payment = new CashPaymentAdapter(cashRegisterPayment);
 
-    CashPaymentAdapter cashPaymentAdapter = new CashPaymentAdapter(cashRegisterPayment);
-
-    saleService.checkout(individualSale, cashDiscount, cashPaymentAdapter, DocumentType.INVOICE_B);
+    saleService.checkout(sale, discount, payment, DocumentType.INVOICE_B);
   }
 }
