@@ -2,6 +2,7 @@ package discount;
 
 public class CashDiscountStrategy implements DiscountStrategy {
   private static final double DISCOUNT_RATE = 0.10;
+  private static final double MAX_DISCOUNT_AMOUNT = 50.00;
 
   @Override
   public double applyDiscount(double price) {
@@ -10,6 +11,9 @@ public class CashDiscountStrategy implements DiscountStrategy {
       throw new IllegalArgumentException("El precio no puede ser negativo.");
     }
 
-    return price * (1 - DISCOUNT_RATE);
+    double rawDiscountAmount = price * DISCOUNT_RATE;
+    double appliedDiscountAmount = Math.min(rawDiscountAmount, MAX_DISCOUNT_AMOUNT);
+
+    return price - appliedDiscountAmount;
   }
 }
