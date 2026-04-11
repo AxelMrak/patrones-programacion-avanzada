@@ -6,9 +6,9 @@ public class Customer {
 
   public Customer(String name, boolean isWholesale) {
 
-    boolean isNameEmptyOrNull = name == null || name.isBlank();
+    boolean isNameBlankOrNull = name == null || name.isBlank();
 
-    if (isNameEmptyOrNull)
+    if (isNameBlankOrNull)
       throw new IllegalArgumentException("El nombre del cliente no puede estar vacio o ser nulo.");
 
     this.name = name;

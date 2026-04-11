@@ -14,9 +14,11 @@ public class MercadoPagoAdapter implements PaymentProcessor {
 
     this.mercadoPagoAPI = Objects.requireNonNull(mercadoPagoAPI, "MercadoPagoAPI no puede ser null");
 
-    if (description == null || description.isBlank()) {
+    boolean isDescriptionBlankOrNull = description == null || description.isBlank();
+
+   if (isDescriptionBlankOrNull)
       throw new IllegalArgumentException("La descripción no puede ser nula o vacía");
-    }
+
     this.description = description;
   }
 

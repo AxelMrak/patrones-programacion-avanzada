@@ -11,7 +11,7 @@ public class FiscalDocumentFactory {
     boolean isDocumentTypeNull = documentType == null;
     if (isDocumentTypeNull) {
       throw new IllegalArgumentException(
-          "El tipo de documento fiscal no puede ser nulo o vacío.");
+          "El tipo de documento fiscal no puede ser nulo.");
     }
 
     switch (documentType) {
