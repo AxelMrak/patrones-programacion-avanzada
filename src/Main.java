@@ -23,7 +23,7 @@ class Main {
 
   private static void runWholesaleScenario(SaleService saleService) {
     // Wholesale Scenario
-    System.out.println("--- Escenario Mayorista --- \n");
+    System.out.println("\n--- Escenario Mayorista --- \n");
 
     Customer customer = new Customer("Empresa Mendoza", true);
     Sale sale = new Sale(customer, 1000.00);
