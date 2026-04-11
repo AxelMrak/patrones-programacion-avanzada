@@ -22,6 +22,11 @@ public class MercadoPagoAdapter implements PaymentProcessor {
 
   @Override
   public void processPayment(double amount) {
+    boolean isAmountNegative = amount < 0;
+
+    if (isAmountNegative)
+      throw new IllegalArgumentException("El monto no puede ser negativo.");
+
     mercadoPagoAPI.createPreference(amount, description);
   }
 }
