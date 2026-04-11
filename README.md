@@ -5,7 +5,7 @@
 - Fecha: 11-04-2026
 - Asignatura: Programación Avanzada
 
-Para la demostración de uso de patrones de diseño en Java. La consigna requiere del uso de al menos 3 patrones de diseño diferentes, siendo un patrón de creación, uno estructural y uno de comportamiento.
+Demostración de uso de patrones de diseño en Java. La consigna requiere del uso de, al menos, 3 patrones de diseño diferentes cada uno perteneciente a la categoria de Creacion, Estructura o de Comportamiento.
 
 ## Patrones de Diseño Utilizados
 
