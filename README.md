@@ -74,3 +74,15 @@ Dependiendo del tipo de cliente/documento, se genera una factura diferente. La i
 **Desventajas de *Simple Factory* en este caso:**
 - Al agregar un nuevo tipo de factura, hay que modificar `FiscalDocumentFactory` y `DocumentType`. Por eso, no cumple OCP de forma estricta como sí lo haría un Factory Method GoF puro.
 - Aun así, en este proyecto el impacto es bajo y manejable porque la cantidad de tipos es acotada.
+
+---
+
+## Referencias
+
+- [Strategy Pattern](https://refactoring.guru/es/design-patterns/strategy)
+- [Factory Method Pattern](https://refactoring.guru/es/design-patterns/factory-method)
+- [Adapter Pattern](https://refactoring.guru/es/design-patterns/adapter)
+
+## LINK REPO
+
+- [AxelMrak/patrones-programacion-avanzada](https://github.com/AxelMrak/patrones-programacion-avanzada)
