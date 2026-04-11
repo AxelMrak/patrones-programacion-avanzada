@@ -2,8 +2,8 @@ import model.Customer;
 import model.Sale;
 import billing.DocumentType;
 import billing.FiscalDocumentFactory;
-import discount.CashDiscountStrategy;
 import discount.DiscountStrategy;
+import discount.IndividualDiscountStrategy;
 import discount.WholesaleDiscountStrategy;
 import payment.CashPaymentAdapter;
 import payment.CashRegisterPayment;
@@ -44,7 +44,7 @@ class Main {
     Customer customer = new Customer("Juan Perez", false);
     Sale sale = new Sale(customer, 200.00);
 
-    DiscountStrategy discount = new CashDiscountStrategy();
+    DiscountStrategy discount = new IndividualDiscountStrategy();
 
     CashRegisterPayment cashRegisterPayment = new CashRegisterPayment();
     CashPaymentAdapter payment = new CashPaymentAdapter(cashRegisterPayment);

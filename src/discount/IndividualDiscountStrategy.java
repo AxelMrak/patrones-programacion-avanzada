@@ -1,6 +1,6 @@
 package discount;
 
-public class CashDiscountStrategy implements DiscountStrategy {
+public class IndividualDiscountStrategy implements DiscountStrategy {
   private static final double DISCOUNT_RATE = 0.10;
   private static final double MAX_DISCOUNT_AMOUNT = 50.00;
 
