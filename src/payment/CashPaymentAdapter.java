@@ -1,10 +1,12 @@
 package payment;
 
+import java.util.Objects;
+
 public class CashPaymentAdapter implements PaymentProcessor {
-  private CashRegisterPayment cashRegisterPayment;
+  private final CashRegisterPayment cashRegisterPayment;
 
   public CashPaymentAdapter(CashRegisterPayment cashRegisterPayment) {
-    this.cashRegisterPayment = cashRegisterPayment;
+    this.cashRegisterPayment = Objects.requireNonNull(cashRegisterPayment, "CashRegisterPayment no puede ser null.");
   }
 
   @Override
