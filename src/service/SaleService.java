@@ -27,18 +27,17 @@ public class SaleService {
     Objects.requireNonNull(paymentProcessor, "El procesador de pagos no puede ser nulo ");
     Objects.requireNonNull(documentType, "El tipo de documento no puede ser nulo");
 
-    String CUSTOMER_NAME = sale.getCustomer().getName();
-    double ORIGINAL_AMOUNT = sale.getOriginalAmount();
-    FiscalDocument FISCAL_DOCUMENT = this.fiscalDocumentFactory.createFiscalDocument(documentType);
-    double AMOUNT_WITH_DISCOUNT_APPLIED = discountStrategy.applyDiscount(ORIGINAL_AMOUNT);
+    String customerName = sale.getCustomer().getName();
+    double originalAmount = sale.getOriginalAmount();
+    FiscalDocument fiscalDocument = this.fiscalDocumentFactory.createFiscalDocument(documentType);
+    double finalAmount = discountStrategy.applyDiscount(originalAmount);
 
-    sale.setFinalAmount(AMOUNT_WITH_DISCOUNT_APPLIED);
-    paymentProcessor.processPayment(AMOUNT_WITH_DISCOUNT_APPLIED);
+    sale.setFinalAmount(finalAmount);
+    paymentProcessor.processPayment(finalAmount);
 
-    double saleFinalAmount = sale.getFinalAmount();
-    FISCAL_DOCUMENT.generate(CUSTOMER_NAME, saleFinalAmount);
+    fiscalDocument.generate(customerName, finalAmount);
 
-    String successMessage = generateSuccessMessage(documentType, CUSTOMER_NAME, saleFinalAmount);
+    String successMessage = generateSuccessMessage(documentType, customerName, finalAmount);
     System.out.println(successMessage);
   }
 
