@@ -1,18 +1,27 @@
 package payment;
 
 import payment.PaymentProcessor;
+
+import java.util.Objects;
+
 import payment.MercadoPagoAPI;
 
 public class MercadoPagoAdapter implements PaymentProcessor {
   private MercadoPagoAPI mercadoPagoAPI;
+  private final String description;
 
-  public MercadoPagoAdapter(MercadoPagoAPI mercadoPagoAPI) {
-    this.mercadoPagoAPI = mercadoPagoAPI;
+  public MercadoPagoAdapter(MercadoPagoAPI mercadoPagoAPI, String description) {
+
+    this.mercadoPagoAPI = Objects.requireNonNull(mercadoPagoAPI, "MercadoPagoAPI no puede ser null");
+
+    if (description == null || description.isBlank()) {
+      throw new IllegalArgumentException("La descripción no puede ser nula o vacía");
+    }
+    this.description = description;
   }
 
   @Override
   public void processPayment(double amount) {
-    String description = "Producto TEST #91218";
     mercadoPagoAPI.createPreference(amount, description);
   }
 }
